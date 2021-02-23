@@ -1,12 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 import Header from '../../components/common/Header'
 
-export default function App() {
+export default ({navigation}) => {
+  const onButtonPress = () => {
+    navigation.navigate('Book')
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Edited</Text>
+      <Header/>
+      <Button
+        title="Go to Book Page"
+        onPress={onButtonPress}
+      />
     </View>
   );
 }
@@ -14,8 +22,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"red",
-    alignItems: 'stretch',
+    backgroundColor:"white",
+    alignItems: 'center',
     justifyContent: 'center',
   },
 });

@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { BorderlessButton } from 'react-native-gesture-handler';
 
 export default () => {
     return(

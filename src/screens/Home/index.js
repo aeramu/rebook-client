@@ -11,8 +11,6 @@ export default ({navigation}) => {
     }
   })
 
-  console.log(data)
-
   const onButtonPress = () => {
     navigation.navigate('Book')
   }

@@ -13,7 +13,7 @@ export default (props) => {
                 <Image
                 resizeMode='stretch' 
                 style={styles.image} 
-                source={require('../../../../assets/kajian.png')}
+                source={{ uri: imageUrl }}
                 />
                 <View style={styles.tag}>
                     <Text style={styles.title}>

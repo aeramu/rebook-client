@@ -2,23 +2,29 @@ import React from 'react'
 import { TouchableHighlight, View, Text, StyleSheet, Image} from 'react-native'
 
 export default (props) => {
-    const {title, author, imageUrl} = props
+    const {title, author, imageUrl, onPress} = props
+
     return(
-        <View style={styles.container}>
-            <Image
-            resizeMode='stretch' 
-            style={styles.image} 
-            source={require('../../../../assets/kajian.png')}
-            />
-            <View style={styles.tag}>
-                <Text style={styles.title}>
-                    {title}
-                </Text>
-                <Text style={styles.subtitle}>
-                    {author}
-                </Text>
+        <TouchableHighlight
+            onPress={onPress}
+            underlayColor="white"
+        >
+            <View style={styles.container}>
+                <Image
+                resizeMode='stretch' 
+                style={styles.image} 
+                source={require('../../../../assets/kajian.png')}
+                />
+                <View style={styles.tag}>
+                    <Text style={styles.title}>
+                        {title}
+                    </Text>
+                    <Text style={styles.subtitle}>
+                        {author}
+                    </Text>
+                </View>
             </View>
-        </View>
+        </TouchableHighlight>
     )
 }
 

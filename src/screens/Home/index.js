@@ -1,10 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import {useQuery, gql} from '@apollo/client'
+import { StyleSheet, Text, View, Button, FlatList, useWindowDimensions } from 'react-native';
+import { useQuery, gql } from '@apollo/client'
 
 import Header from '../../components/common/Header'
+import Card from '../../components/book/Card'
 
 export default ({navigation}) => {
+  const numColumns = Math.floor(useWindowDimensions().width / 250) 
+
   const { loading, data } = useQuery(GET_BOOK_LIST,{
     variables: {
       first: 50,
@@ -28,16 +31,26 @@ export default ({navigation}) => {
     )
   }
 
-  const onButtonPress = () => {
-    navigation.navigate('Book')
+  const onCardPress = (id) => () => {
+    navigation.navigate('Book', { bookId:id })
   }
-
+ 
   return (
     <View style={styles.container}>
       <Header/>
-      <Button
-        title="Go to Book Page"
-        onPress={onButtonPress}
+      <FlatList
+        key={numColumns}
+        numColumns={numColumns ? numColumns : 1}
+        data={data.getBookList.edges}
+        renderItem={({item}) => <View style={styles.cardContainer}>
+          <Card
+            title={item.title}
+            author={item.author}
+            imageUrl={item.coverImage}
+            onPress={onCardPress(item.id)}
+          />
+        </View>}
+        keyExtractor={item => item.id }
       />
     </View>
   );
@@ -50,6 +63,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  cardContainer : {
+    margin:20
+  }
 });
 
 const GET_BOOK_LIST = gql`

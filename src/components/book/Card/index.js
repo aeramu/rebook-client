@@ -11,15 +11,15 @@ export default (props) => {
         >
             <View style={styles.container}>
                 <Image
-                resizeMode='stretch' 
+                resizeMode='cover' 
                 style={styles.image} 
                 source={{ uri: imageUrl }}
                 />
                 <View style={styles.tag}>
-                    <Text style={styles.title}>
+                    <Text style={styles.title} numberOfLines={2}>
                         {title}
                     </Text>
-                    <Text style={styles.subtitle}>
+                    <Text style={styles.subtitle} numberOfLines={1}>
                         {author}
                     </Text>
                 </View>
@@ -36,10 +36,11 @@ const styles = StyleSheet.create({
         overflow:'hidden',
         borderWidth: 0.75,
         borderColor: 'grey',
+        width: 210,
+        height:420,
     },
     image: {
-        width: 150,  
-        height: 200,   
+        height: 320
     },
     tag: {
         flex: 1,

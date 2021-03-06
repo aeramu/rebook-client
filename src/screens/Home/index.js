@@ -5,8 +5,6 @@ import { useQuery, gql } from '@apollo/client'
 import Header from '../../components/common/Header'
 import Card from '../../components/book/Card'
 
-// const initWindowWidth = Dimensions.get("window").width;
-
 export default ({navigation}) => {
   const numColumns = Math.floor(useWindowDimensions().width / 250) 
 

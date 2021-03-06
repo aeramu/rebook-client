@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Dimensions } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Button, FlatList, useWindowDimensions } from 'react-native';
 import { useQuery, gql } from '@apollo/client'
 
 import Header from '../../components/common/Header'
 import Card from '../../components/book/Card'
 
-const initWindowWidth = Dimensions.get("window").width;
+// const initWindowWidth = Dimensions.get("window").width;
 
 export default ({navigation}) => {
-  const [windowWidth, setWindowWidth] = useState( initWindowWidth );
-
-  const onChange = ({ window }) => {
-    setWindowWidth( window.width );
-  };
-
-  useEffect(() => {
-    Dimensions.addEventListener("change", onChange);
-    return () => {
-      Dimensions.removeEventListener("change", onChange);
-    };
-  });
-
-  const numColumns = Math.floor(windowWidth / 250) 
+  const numColumns = Math.floor(useWindowDimensions().width / 250) 
 
   const { loading, data } = useQuery(GET_BOOK_LIST,{
     variables: {
@@ -62,14 +49,10 @@ export default ({navigation}) => {
             title={item.title}
             author={item.author}
             imageUrl={item.coverImage}
-            onPress={()=>alert(`Kamu mencet ${item.title}`)}
+            onPress={() => navigation.navigate('Book', { bookId:item.id })}
           />
         </View>}
         keyExtractor={item => item.id }
-      />
-      <Button
-        title="Go to Book Page"
-        onPress={onButtonPress}
       />
     </View>
   );

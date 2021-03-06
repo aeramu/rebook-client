@@ -20,7 +20,10 @@ export default () => {
                     <Text style={styles.author}>
                         Penulis
                     </Text>
-                    <Summary style={styles.summary}/>
+                    <Summary
+                        bookID = {"tes"} 
+                        style={styles.summary}
+                    />
                 </View>
             </View>
         </View>

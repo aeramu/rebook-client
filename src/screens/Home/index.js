@@ -31,8 +31,8 @@ export default ({navigation}) => {
     )
   }
 
-  const onCardPress = (id) => () => {
-    navigation.navigate('Book', { bookId:id })
+  const onPressCard = (bookId) => {
+    navigation.navigate('Book', { bookId })
   }
  
   return (
@@ -47,7 +47,7 @@ export default ({navigation}) => {
             title={item.title}
             author={item.author}
             imageUrl={item.coverImage}
-            onPress={onCardPress(item.id)}
+            onPress={() => onPressCard(item.id)}
           />
         </View>}
         keyExtractor={item => item.id }

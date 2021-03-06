@@ -5,11 +5,28 @@ import {useQuery, gql} from '@apollo/client'
 import Header from '../../components/common/Header'
 
 export default ({navigation}) => {
-  const { loading, error, data, networkStatus, refetch, fetchMore } = useQuery(BOOK_LIST,{
-    variables:{
-      cursor: null
+  const { loading, data } = useQuery(GET_BOOK_LIST,{
+    variables: {
+      first: 50,
+      after: null
     }
   })
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
+
+  if (!data) {
+    return (
+      <View>
+        <Text>Failed to load</Text>
+      </View>
+    )
+  }
 
   const onButtonPress = () => {
     navigation.navigate('Book')
@@ -35,9 +52,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const BOOK_LIST = gql`
-  query($cursor: String){
-    getBookList(first: 50, after: $cursor){
+const GET_BOOK_LIST = gql`
+  query($first: Int! $after: String){
+    getBookList(first: $first after: $after){
       edges{
         id
         title

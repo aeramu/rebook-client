@@ -1,0 +1,22 @@
+{
+  "files": {
+    "app.js": "/rebook-client/static/js/app.127fc802.chunk.js",
+    "app.js.map": "/rebook-client/static/js/app.127fc802.chunk.js.map",
+    "runtime~app.js": "/rebook-client/static/js/runtime~app.d1262ec4.js",
+    "runtime~app.js.map": "/rebook-client/static/js/runtime~app.d1262ec4.js.map",
+    "static/js/2.8db706cf.chunk.js": "/rebook-client/static/js/2.8db706cf.chunk.js",
+    "static/js/2.8db706cf.chunk.js.map": "/rebook-client/static/js/2.8db706cf.chunk.js.map",
+    "favicon-16.png": "/rebook-client/favicon-16.png",
+    "favicon-32.png": "/rebook-client/favicon-32.png",
+    "favicon.ico": "/rebook-client/favicon.ico",
+    "index.html": "/rebook-client/index.html",
+    "manifest.json": "/rebook-client/manifest.json",
+    "serve.json": "/rebook-client/serve.json",
+    "static/js/2.8db706cf.chunk.js.LICENSE.txt": "/rebook-client/static/js/2.8db706cf.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.d1262ec4.js",
+    "static/js/2.8db706cf.chunk.js",
+    "static/js/app.127fc802.chunk.js"
+  ]
+}

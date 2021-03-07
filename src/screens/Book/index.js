@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import { gql, useQuery} from '@apollo/client'
 
 import Summary from './Summary'
+import Reference from './Reference'
 import Header from '../../components/common/Header'
 
 export default (props) => {
@@ -50,6 +51,10 @@ export default (props) => {
                         bookID = {route.params.bookId} 
                         style={styles.summary}
                     />
+                    <Reference
+                        bookID = {route.params.bookId}
+                        style = {styles.reference}
+                    />
                 </View>
             </View>
         </View>
@@ -87,6 +92,10 @@ const styles = StyleSheet.create({
     },
     summary: {
         marginTop: 20,
+        height: 400,
+    },
+    reference: {
+        marginTop: 30,
     }
 });
 

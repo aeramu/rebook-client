@@ -24,11 +24,13 @@ export default (props) => {
 
     return (
         <View style={style}>
+            <View style={styles.textContainer}>
             {
                 loading
                 ? <Text>Loading...</Text>
                 : <Text>{data.getBookByID.summary.text}</Text>
             }
+            </View>
             <View style={styles.buttonContainer}>
                 <Button
                     title="Previous"
@@ -55,6 +57,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 40,
     },
+    textContainer:{
+        flex:1
+    }
 });
 
 const GET_BOOK_BY_ID_SUMMARY = gql`

@@ -1,27 +1,53 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 
+import { gql, useQuery} from '@apollo/client'
+
 import Summary from './Summary'
 import Header from '../../components/common/Header'
 
-export default () => {
+export default (props) => {
+    const { route } = props
+
+    const {data, loading} = useQuery(GET_BOOK_BY_ID, {
+        variables:{
+            id: route.params.bookId
+        }
+    })
+
+    if (loading) {
+        return (
+            <View>
+                <Text>Loading...</Text>
+            </View>
+        )
+    }
+    
+    if (!data) {
+        return (
+            <View>
+                <Text>Failed to load</Text>
+            </View>
+        )
+    }
+
     return (
         <View>
             <Header/>
             <View style={styles.container}>
                 <Image
                 style={styles.image} 
-                source={{ uri: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1328310410l/12329637.jpg'}}
+                source={{ uri: data.getBookByID.coverImage}}
                 />
                 <View style={styles.containerTitle}>
                     <Text style={styles.title}>
-                        Judul Buku
+                        {data.getBookByID.title}
                     </Text>
                     <Text style={styles.author}>
-                        Penulis
+                        {data.getBookByID.author}
                     </Text>
                     <Summary
-                        bookID = {"tes"} 
+                        bookID = {route.params.bookId} 
                         style={styles.summary}
                     />
                 </View>
@@ -63,3 +89,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
     }
 });
+
+const GET_BOOK_BY_ID = gql`
+    query($id: ID!){
+        getBookByID(id: $id){
+            id
+            title
+            author
+            coverImage
+        }
+    }
+`

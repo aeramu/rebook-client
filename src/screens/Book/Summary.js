@@ -6,6 +6,7 @@ import {gql, useQuery} from '@apollo/client'
 export default (props) => {
     const {bookID, style} = props
     const [page, setPage] = React.useState(1)
+    const [totalPage, setTotalPage] = React.useState(1)
 
     const {data, loading} = useQuery(GET_BOOK_BY_ID_SUMMARY, {
         variables:{
@@ -13,6 +14,12 @@ export default (props) => {
             page: page,
         }
     })
+
+    React.useEffect(() => {
+        if (data && (data.getBookByID.summary.totalPage != 0)) {
+            setTotalPage(data.getBookByID.summary.totalPage)
+        }
+    }, [data])
 
     const onNextPress = () => {
         setPage(page + 1)
@@ -38,12 +45,12 @@ export default (props) => {
                     disabled={page == 1}
                 />
                 <Text>
-                    {page + '/' + (data? data.getBookByID.summary.totalPage : 1)}
+                    {page + '/' + totalPage}
                 </Text>
                 <Button
                     title="Next"
                     onPress={onNextPress}
-                    disabled={page >= (loading? 1 : data.getBookByID.summary.totalPage)}
+                    disabled={page >= totalPage}
                 />
             </View>
         </View>

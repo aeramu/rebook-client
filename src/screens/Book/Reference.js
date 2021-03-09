@@ -14,7 +14,7 @@ export default (props) => {
 
     if (loading) {
         return (
-            <View>
+            <View style={style}>
                 <Text>Loading...</Text>
             </View>
         )

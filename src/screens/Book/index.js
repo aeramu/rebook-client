@@ -40,9 +40,9 @@ export default (props) => {
             <View style={styles.container}>
                 <View style={styles.image}>
                     <Image
-                        style={{ height: height, width: height*15/22}} 
+                        style={{ height: height, width: height*2/3}} 
                         source={{ uri: data.getBookByID.coverImage}}
-                        resizeMode='contain'
+                        resizeMode='cover'
                     />
                 </View>
                 <View style={styles.containerTitle}>

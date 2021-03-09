@@ -1,35 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, FlatList, useWindowDimensions } from 'react-native';
 import { useQuery, gql } from '@apollo/client'
 
 import Header from '../../components/common/Header'
 import Card from '../../components/book/Card'
+import SearchBar from '../../components/common/SearchBar'
 
 export default ({navigation}) => {
   const numColumns = Math.floor(useWindowDimensions().width / 250) 
 
-  const { loading, data } = useQuery(GET_BOOK_LIST,{
+  const [filter, setFilter] = React.useState("")
+
+  const {loading, data} = useQuery(GET_BOOK_LIST,{
     variables: {
       first: 50,
-      after: null
+      after: null,
+      filter: filter
     }
   })
-
-  if (loading) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    )
-  }
-
-  if (!data) {
-    return (
-      <View>
-        <Text>Failed to load</Text>
-      </View>
-    )
-  }
 
   const onCardPress = (id) => () => {
     navigation.navigate('Book', { bookId:id })
@@ -38,20 +26,28 @@ export default ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header/>
-      <FlatList
-        key={numColumns}
-        numColumns={numColumns ? numColumns : 1}
-        data={data.getBookList.edges}
-        renderItem={({item}) => <View style={styles.cardContainer}>
-          <Card
-            title={item.title}
-            author={item.author}
-            imageUrl={item.coverImage}
-            onPress={onCardPress(item.id)}
-          />
-        </View>}
-        keyExtractor={item => item.id }
+      <SearchBar
+        style={styles.searchBar}
+        onChangeText={setFilter}
       />
+      {
+        loading
+        ? <Text>Loading...</Text>
+        : <FlatList
+          key={numColumns}
+          numColumns={numColumns ? numColumns : 1}
+          data={data && data.getBookList.edges}
+          renderItem={({item}) => <View style={styles.cardContainer}>
+            <Card
+              title={item.title}
+              author={item.author}
+              imageUrl={item.coverImage}
+              onPress={onCardPress(item.id)}
+            />
+          </View>}
+          keyExtractor={item => item.id }
+        />
+      }
     </View>
   );
 }
@@ -65,12 +61,17 @@ const styles = StyleSheet.create({
   },
   cardContainer : {
     margin:20
+  },
+  searchBar: {
+    marginTop:30,
+    marginBottom:20,
+    width:300
   }
 });
 
 const GET_BOOK_LIST = gql`
-  query($first: Int! $after: String){
-    getBookList(first: $first after: $after){
+  query($first: Int!, $after: String, $filter: String){
+    getBookList(first: $first, after: $after, filter: $filter){
       edges{
         id
         title

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, useWindowDimensions } from 'react-native'
 
 import { gql, useQuery} from '@apollo/client'
 
@@ -9,6 +9,8 @@ import Header from '../../components/common/Header'
 
 export default (props) => {
     const { route } = props
+
+    const height = useWindowDimensions().height - 200
 
     const {data, loading} = useQuery(GET_BOOK_BY_ID, {
         variables:{
@@ -36,10 +38,13 @@ export default (props) => {
         <View>
             <Header/>
             <View style={styles.container}>
-                <Image
-                style={styles.image} 
-                source={{ uri: data.getBookByID.coverImage}}
-                />
+                <View style={styles.image}>
+                    <Image
+                        style={{ height: height, width: height*2/3}} 
+                        source={{ uri: data.getBookByID.coverImage}}
+                        resizeMode='cover'
+                    />
+                </View>
                 <View style={styles.containerTitle}>
                     <Text style={styles.title}>
                         {data.getBookByID.title}
@@ -49,7 +54,7 @@ export default (props) => {
                     </Text>
                     <Summary
                         bookID = {route.params.bookId} 
-                        style={styles.summary}
+                        style={{height: height - 100}}
                     />
                     <Reference
                         bookID = {route.params.bookId}
@@ -66,20 +71,19 @@ const styles = StyleSheet.create({
         alignItems:'stretch',
         justifyContent: 'flex-start',   
         flexDirection: 'column',
-        marginLeft: 50,
         flex: 1,
     },
     container:{
         alignItems:'stretch',
         justifyContent: 'flex-start', 
         flexDirection: 'row',
-        padding: 50,
-        backgroundColor:'white'
+        padding: 30,
+        backgroundColor:'white',
+        flexWrap:'wrap'
     },
     image: {
-        width: 350,  
-        height: 500,
-        borderRadius: 10,
+        marginBottom:20,
+        marginRight:30,
     },
     title: {
         fontSize: 50,
@@ -89,10 +93,7 @@ const styles = StyleSheet.create({
     author: {
         fontSize: 20,
         color: 'grey',
-    },
-    summary: {
-        marginTop: 20,
-        height: 400,
+        marginBottom: 10
     },
     reference: {
         marginTop: 30,

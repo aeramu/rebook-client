@@ -5,11 +5,15 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Home from '../screens/Home'
 import Book from '../screens/Book'
-
+import Header from '../components/common/Header'
 const RootStack = createStackNavigator()
 const RootStackScreen = () => {
     return (
-        <RootStack.Navigator screenOptions={{ headerShown: false }}>
+        <RootStack.Navigator screenOptions={{ 
+            header: () => {
+                return <Header/>
+            } 
+        }}>
             <RootStack.Screen name='Home' component={Home}/>
             <RootStack.Screen name='Book' component={Book}/>
         </RootStack.Navigator>

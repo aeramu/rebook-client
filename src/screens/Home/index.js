@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, useWindowDimensions } from 'react-native';
 import { useQuery, gql } from '@apollo/client'
 
-import Header from '../../components/common/Header'
 import Card from '../../components/book/Card'
 import SearchBar from '../../components/common/SearchBar'
 
@@ -25,7 +24,6 @@ export default ({navigation}) => {
  
   return (
     <View style={styles.container}>
-      <Header/>
       <SearchBar
         style={styles.searchBar}
         onChangeText={setFilter}

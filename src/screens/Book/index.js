@@ -5,7 +5,6 @@ import { gql, useQuery} from '@apollo/client'
 
 import Summary from './Summary'
 import Reference from './Reference'
-import Header from '../../components/common/Header'
 
 export default (props) => {
     const { route } = props
@@ -36,7 +35,6 @@ export default (props) => {
 
     return (
         <View>
-            <Header/>
             <View style={styles.container}>
                 <View style={styles.image}>
                     <Image

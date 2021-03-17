@@ -28,8 +28,10 @@ const styles = StyleSheet.create({
         borderColor:'grey',
         borderRadius: 20,
         padding: 10,
+        paddingHorizontal:20,
     },
     textInput:{
         flex:1,
+        outlineWidth:0,
     }
 })

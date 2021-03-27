@@ -18,7 +18,7 @@ export default ({navigation}) => {
     }
   })
 
-  const onCardPress = (id) => () => {
+  const onCardPress = (id) => {
     navigation.navigate('Book', { bookId:id })
   }
  

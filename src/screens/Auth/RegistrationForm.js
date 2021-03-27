@@ -6,17 +6,30 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 export default () => {
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
+    const [username, setUsername] = React.useState("")
+    const [name, setName] = React.useState("")
+
     return(
         <View style={styles.container}>
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}
+                    placeholder="Username..."
+                    placeholderTextColor="#003f5c"
+                    onChangeText={(username) => setUsername(username)}
+                />
+            </View>
+   
+            <View style={styles.inputView}>
+                <TextInput
+                    style={styles.TextInput}
                     placeholder="Email..."
                     placeholderTextColor="#003f5c"
+                    secureTextEntry={true}
                     onChangeText={(email) => setEmail(email)}
                 />
             </View>
-    
+
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}
@@ -27,8 +40,18 @@ export default () => {
                 />
             </View>
 
+            <View style={styles.inputView}>
+                <TextInput
+                    style={styles.TextInput}
+                    placeholder="Nama Lengkap..."
+                    placeholderTextColor="#003f5c"
+                    secureTextEntry={true}
+                    onChangeText={(namalengkap) => setPassword(password)}
+                />
+            </View>
+
             <TouchableOpacity style={styles.loginBtn}>
-                <Text style={styles.loginText}>LOGIN</Text>
+                <Text style={styles.loginText}>REGISTER</Text>
             </TouchableOpacity>
         </View>
     )

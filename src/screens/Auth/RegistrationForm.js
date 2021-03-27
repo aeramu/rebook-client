@@ -56,7 +56,7 @@ export default (props) => {
             </Text>
 
             <TouchableOpacity style={styles.loginBtn}>
-                <Text style={styles.loginText}>Register</Text>
+                <Text>Register</Text>
             </TouchableOpacity>
         </View>
     )

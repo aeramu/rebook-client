@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Home from '../screens/Home'
 import Book from '../screens/Book'
+import Auth from '../screens/Auth'
 import Header from '../components/common/Header'
 const RootStack = createStackNavigator()
 const RootStackScreen = () => {
@@ -16,6 +17,7 @@ const RootStackScreen = () => {
         }}>
             <RootStack.Screen name='Home' component={Home}/>
             <RootStack.Screen name='Book' component={Book}/>
+            <RootStack.Screen name='Auth' component={Auth}/>
         </RootStack.Navigator>
     )
 }

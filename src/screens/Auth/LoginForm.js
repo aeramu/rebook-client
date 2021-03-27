@@ -3,7 +3,8 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 
-export default () => {
+export default (props) => {
+    const {onPress} = props
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     return(
@@ -26,6 +27,10 @@ export default () => {
                     onChangeText={(password) => setPassword(password)}
                 />
             </View>
+
+            <Text onPress={onPress} style={styles.account}>
+                Don't have an account?
+            </Text>
 
             <TouchableOpacity style={styles.loginBtn}>
                 <Text style={styles.loginText}>LOGIN</Text>
@@ -72,5 +77,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 40,
         backgroundColor: "skyblue",
+    },
+
+    account: {
+        fontSize: 15,
+        color: "blue",
     },
 })

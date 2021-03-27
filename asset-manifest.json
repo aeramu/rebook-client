@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/rebook-client/static/js/app.9a0fc006.chunk.js",
-    "app.js.map": "/rebook-client/static/js/app.9a0fc006.chunk.js.map",
+    "app.js": "/rebook-client/static/js/app.4d806347.chunk.js",
+    "app.js.map": "/rebook-client/static/js/app.4d806347.chunk.js.map",
     "runtime~app.js": "/rebook-client/static/js/runtime~app.d1262ec4.js",
     "runtime~app.js.map": "/rebook-client/static/js/runtime~app.d1262ec4.js.map",
-    "static/js/2.3093b717.chunk.js": "/rebook-client/static/js/2.3093b717.chunk.js",
-    "static/js/2.3093b717.chunk.js.map": "/rebook-client/static/js/2.3093b717.chunk.js.map",
+    "static/js/2.19df2a23.chunk.js": "/rebook-client/static/js/2.19df2a23.chunk.js",
+    "static/js/2.19df2a23.chunk.js.map": "/rebook-client/static/js/2.19df2a23.chunk.js.map",
     "fonts/AntDesign.ttf": "/rebook-client/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/rebook-client/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/rebook-client/./fonts/Feather.ttf",
@@ -24,11 +24,11 @@
     "index.html": "/rebook-client/index.html",
     "manifest.json": "/rebook-client/manifest.json",
     "serve.json": "/rebook-client/serve.json",
-    "static/js/2.3093b717.chunk.js.LICENSE.txt": "/rebook-client/static/js/2.3093b717.chunk.js.LICENSE.txt"
+    "static/js/2.19df2a23.chunk.js.LICENSE.txt": "/rebook-client/static/js/2.19df2a23.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime~app.d1262ec4.js",
-    "static/js/2.3093b717.chunk.js",
-    "static/js/app.9a0fc006.chunk.js"
+    "static/js/2.19df2a23.chunk.js",
+    "static/js/app.4d806347.chunk.js"
   ]
 }

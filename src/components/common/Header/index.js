@@ -16,7 +16,7 @@ export default () => {
                 <Text style={styles.title} onPress={onHeaderPress}>BiblioGig</Text>
                 <Text style={styles.subtitle}>by Coder x ISH TIBEN</Text>
             </View>
-            <Text style={styles.login} onPress={onLoginPress}>LOGIN</Text>
+            <Text style={styles.login} onPress={onLoginPress}>Login</Text>
         </View>
 
     )
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         paddingLeft: 60,
     },
     login:   {
-        fontSize: 25,
+        fontSize: 20,
         color: 'white',
         paddingBottom: 10,
         paddingRight: 60,

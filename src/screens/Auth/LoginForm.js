@@ -33,7 +33,7 @@ export default (props) => {
             </Text>
 
             <TouchableOpacity style={styles.loginBtn}>
-                <Text style={styles.loginText}>LOGIN</Text>
+                <Text style={styles.loginText}>Login</Text>
             </TouchableOpacity>
         </View>
     )
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 25,
         marginLeft: 20,
+        outlineWidth: 0,
     },
 
       loginBtn: {
@@ -80,7 +81,8 @@ const styles = StyleSheet.create({
     },
 
     account: {
-        fontSize: 15,
-        color: "blue",
+        fontSize: 13,
+        color: "skyblue",
+        fontWeight: "bold",
     },
 })

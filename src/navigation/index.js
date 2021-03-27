@@ -6,7 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../screens/Home'
 import Book from '../screens/Book'
 import Auth from '../screens/Auth'
+import EditReview from '../screens/EditReview'
 import Header from '../components/common/Header'
+
 const RootStack = createStackNavigator()
 const RootStackScreen = () => {
     return (
@@ -18,6 +20,7 @@ const RootStackScreen = () => {
             <RootStack.Screen name='Home' component={Home}/>
             <RootStack.Screen name='Book' component={Book}/>
             <RootStack.Screen name='Auth' component={Auth}/>
+            <RootStack.Screen name='EditReview' component={EditReview}/>
         </RootStack.Navigator>
     )
 }
@@ -29,7 +32,9 @@ const linking = {
     ],
     config: {
         Home: '',
-        Book: 'book/:bookId'
+        Book: 'book/:bookId',
+        Auth: 'login',
+        EditReview: 'edit'
     },
 };
 

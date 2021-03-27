@@ -33,7 +33,7 @@ export default (props) => {
             </Text>
 
             <TouchableOpacity style={styles.loginBtn}>
-                <Text style={styles.loginText}>Login</Text>
+                <Text>Login</Text>
             </TouchableOpacity>
         </View>
     )

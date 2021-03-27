@@ -40,7 +40,7 @@ export default ({navigation}) => {
               title={item.title}
               author={item.author}
               imageUrl={item.coverImage}
-              onPress={onCardPress(item.id)}
+              onPress={() => onCardPress(item.id)}
             />
           </View>}
           keyExtractor={item => item.id }

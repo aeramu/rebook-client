@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Editor from '../../components/common/Editor'
 
+require('./styles.css')
+
 export default () => {
+    const [title, setTitle] = useState("")
 
     return(
         <View style={styles.container}>
@@ -14,6 +17,8 @@ export default () => {
             <Editor
                 style = {{fontSize: 45}}
                 placeholder="Title..."
+                onChangeText={setTitle}
+                text={title}
             />
             <Editor
                 style = {{fontSize: 25}}

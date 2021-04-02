@@ -1,17 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { gql, useMutation} from '@apollo/client'
 
 export default (props) => {
+    const {onPress} = props
+    const [register, {loading}] = useMutation(REGISTER)
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [username, setUsername] = React.useState("")
     const [name, setName] = React.useState("")
-    const {onPress} = props
+    const [errorMessage, setErrorMessage] = React.useState(" ")
+
+    const onRegister = () => {
+        setErrorMessage(" ")
+        register({
+            variables:{
+                email: email,
+                password: password,
+                username: username, 
+                name: name,
+            }
+        }).then(({data, errors}) => {
+            if (errors) {
+                const message = errors[0].message
+                setErrorMessage(message)
+            }
+            else {
+                console.log(data);
+            }
+        })
+    }
 
     return(
         <View style={styles.container}>
+   
+            <View style={styles.inputView}>
+                <TextInput
+                    style={styles.TextInput}
+                    placeholder="Email..."
+                    placeholderTextColor="#003f5c"
+                    onChangeText={(email) => setEmail(email)}
+                />
+            </View>
+
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}
@@ -20,14 +51,13 @@ export default (props) => {
                     onChangeText={(username) => setUsername(username)}
                 />
             </View>
-   
+
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}
-                    placeholder="Email..."
+                    placeholder="Nama Lengkap..."
                     placeholderTextColor="#003f5c"
-                    secureTextEntry={true}
-                    onChangeText={(email) => setEmail(email)}
+                    onChangeText={(name) => setName(name)}
                 />
             </View>
 
@@ -41,26 +71,33 @@ export default (props) => {
                 />
             </View>
 
-            <View style={styles.inputView}>
-                <TextInput
-                    style={styles.TextInput}
-                    placeholder="Nama Lengkap..."
-                    placeholderTextColor="#003f5c"
-                    secureTextEntry={true}
-                    onChangeText={(namalengkap) => setPassword(password)}
-                />
-            </View>
+            <Text style={styles.error}>{errorMessage}</Text>
 
             <Text onPress={onPress} style={styles.account}>
                 Already have an account?
             </Text>
 
-            <TouchableOpacity style={styles.loginBtn}>
-                <Text>Register</Text>
+            <TouchableOpacity 
+                style={styles.loginBtn}
+                onPress={onRegister}
+                disabled={loading}
+            >
+                {loading ? <ActivityIndicator/> : <Text>Register</Text>}
             </TouchableOpacity>
         </View>
     )
 }
+
+const REGISTER = gql`
+    mutation($email: String!, $username: String!, $password: String!, $name: String!) {
+        register(input:{
+            email:$email
+            username:$username
+            password:$password
+            name:$name
+        })
+    }
+`
 
 
 const styles = StyleSheet.create({
@@ -80,7 +117,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 2,
         height: 45,
-        marginBottom: 20,
+        marginBottom: 10,
         alignItems: "center",
         justifyContent: "center",
     },
@@ -91,6 +128,11 @@ const styles = StyleSheet.create({
         padding: 25,
         marginLeft: 20,
         outlineWidth: 0,
+    },
+
+    error: {
+        color:'red',
+        marginBottom:20,
     },
 
     loginBtn: {

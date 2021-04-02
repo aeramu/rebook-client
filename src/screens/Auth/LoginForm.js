@@ -1,12 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { gql, useMutation} from '@apollo/client'
 
 
 export default (props) => {
     const {onPress} = props
+    const [login, {loading}] = useMutation(LOGIN)
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
+    const [errorMessage, setErrorMessage] = React.useState(" ")
+
+    const onLogin = () => {
+        setErrorMessage(" ")
+        login({
+            variables:{
+                email: email,
+                password: password
+            }
+        }).then(({data, errors}) => {
+            if (errors) {
+                const message = errors[0].message
+                setErrorMessage(message)
+            }
+            else {
+                console.log(data);
+            }
+        })
+    }
+
     return(
         <View style={styles.container}>
             <View style={styles.inputView}>
@@ -28,16 +49,28 @@ export default (props) => {
                 />
             </View>
 
+            <Text style={styles.error}>{errorMessage}</Text>
+
             <Text onPress={onPress} style={styles.account}>
                 Don't have an account?
             </Text>
 
-            <TouchableOpacity style={styles.loginBtn}>
-                <Text>Login</Text>
+            <TouchableOpacity 
+                style={styles.loginBtn} 
+                onPress={onLogin}
+                disabled={loading}
+            >
+                {loading ? <ActivityIndicator/> : <Text>Login</Text>}
             </TouchableOpacity>
         </View>
     )
 }
+
+const LOGIN = gql`
+    mutation($email: String!, $password: String!) {
+        login(email:$email, password:$password)
+    }
+`
 
 
 const styles = StyleSheet.create({
@@ -57,12 +90,17 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 2,
         height: 45,
-        marginBottom: 20,
+        marginBottom: 10,
         alignItems: "center",
         justifyContent: "center",
     },
+
+    error: {
+        color:'red',
+        marginBottom:20,
+    },
     
-      TextInput: {
+    TextInput: {
         height: 50,
         flex: 1,
         padding: 25,
@@ -70,7 +108,7 @@ const styles = StyleSheet.create({
         outlineWidth: 0,
     },
 
-      loginBtn: {
+    loginBtn: {
         borderRadius: 5,
         width: "70%",
         height: 50,

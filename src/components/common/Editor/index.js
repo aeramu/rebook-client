@@ -4,6 +4,8 @@ import Editor from 'react-medium-editor'
 require('medium-editor/dist/css/medium-editor.css')
 require('medium-editor/dist/css/themes/default.css')
 
+require('./styles.css')
+
 export default (props) => {
     const {text, onChangeText, placeholder, style} = props
     return(

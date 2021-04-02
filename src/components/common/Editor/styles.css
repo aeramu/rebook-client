@@ -1,0 +1,3 @@
+.medium-editor-placeholder:after {
+    pointer-events: none;
+  }
